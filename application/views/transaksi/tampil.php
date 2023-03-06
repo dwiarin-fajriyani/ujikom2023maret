@@ -15,15 +15,43 @@
 		<div class="card-body">
 			<div class="row mt-3">
 				<div class="col-md-12 d-flex justify-content-between align-items-center">
-					<a href="<?php echo base_url('transaksi/tambah'); ?>" role="button" class="btn btn-primary">Tambah Transaksi</a>
+						<span>
+							<a href="<?php echo base_url('transaksi/tambah'); ?>" role="button" class="btn btn-primary">Tambah Transaksi</a>
+							<a href="<?php echo base_url('transaksi/pdf'); ?>" target="_blank" role="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Export Laporan</a>
+							<!-- Modal -->
+							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Laporan</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+								<form action="<?php echo base_url('transaksi/pdf');?>" method="post">
+									<div class="input-group">
+										<span class="input-group-text">Periode</span>
+										<input type="date" aria-label="Awal" name="tglAwal" class="form-control">
+										<input type="date" aria-label="Last name" name="tglAkhir" class="form-control">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+										<button type="submit" class="btn btn-primary">Buat Laporan</button>
+									</div>
+								</form>
+								</div>
+							</div>
+							</div>
+						</span>
 					<form action="" method="post">
 						<div class="input-group">
 						  <input type="text" class="form-control" placeholder="Cari Data Transaksi" name="keyword">
 						  <button class="btn btn-primary" type="submit">Cari</button>
 						</div>
 					</form>
+					</div>
 				</div>
-			</div>
+			
 			
 			<?php if (empty($transaksi)) : ?>
 			<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">

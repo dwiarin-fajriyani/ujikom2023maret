@@ -8,6 +8,16 @@ class Transaksi_model extends CI_Model
 		$this->db->join('petugas', 'petugas.kd_petugas = transaksi.kd_petugas');
 		return $query = $this->db->get();
 	}
+
+	public function dataLaporan($tglAwal, $tglAkhir) {
+		$this->db->select('kd_transaksi, tanggal, nasabah.no_rek, nasabah.nama as nama_nasabah, jenis_transaksi, petugas.nama as nama_petugas, nominal');
+		$this->db->from('transaksi');
+		$this->db->join('nasabah', 'nasabah.no_rek = transaksi.no_rek');
+		$this->db->join('petugas', 'petugas.kd_petugas = transaksi.kd_petugas');
+		$this->db->where('tanggal BETWEEN "'. date('Y-m-d', strtotime($tglAwal)). '" and "'. date('Y-m-d', strtotime($tglAkhir)).'"');
+		return $query = $this->db->get();
+	}
+
 	public function getMaxTrans(){
 		$this->db->select_max('substr(kd_transaksi,-4)','kode');
 		return $query = $this->db->get('transaksi');
